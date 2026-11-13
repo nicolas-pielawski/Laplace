@@ -469,9 +469,7 @@ class CurvlinopsInterface(CurvatureInterface):
         )
 
         p = next(self.model.parameters())
-        H = torch.as_tensor(
-            linop @ torch.eye(linop.shape[0]), device=p.device, dtype=p.dtype
-        )
+        H = linop @ torch.eye(linop.shape[0], device=p.device, dtype=p.dtype)
 
         return self.factor * loss.detach(), self._linop_curvature_factor * H
 
